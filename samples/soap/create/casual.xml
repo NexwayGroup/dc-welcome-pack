@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://ws.prep.websizing.com/global/order/v2.2/soap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Body>
+<ns1:createResponse>
+<ns1:out>
+	<ns1:partnerOrderNumber>9762453</ns1:partnerOrderNumber>
+	<ns1:orderNumber>12567642</ns1:orderNumber>
+	<ns1:orderLines>
+		<ns1:createOrderLineResponseType>
+			<ns1:productRef>734876</ns1:productRef>
+			<ns1:lineItems>
+				<ns1:createLineItemResponseType>
+					<ns1:serials>
+						<ns1:createSerialResponseType>
+							<ns1:data>XXXXXXXXXXXXXXXX</ns1:data>
+							<ns1:encoding>text</ns1:encoding>
+							<ns1:charset>utf-8</ns1:charset>
+							<ns1:fileName></ns1:fileName>
+						</ns1:createSerialResponseType>
+					</ns1:serials>
+					<ns1:responseCode>0</ns1:responseCode>
+					<ns1:responseMessage></ns1:responseMessage>
+				</ns1:createLineItemResponseType>
+			</ns1:lineItems>
+			<ns1:files>
+				<ns1:createFileResponseType>
+					<ns1:label>1001 Nights: Aladdin</ns1:label>
+					<ns1:type>install</ns1:type>
+					<ns1:url>http://shell.boonty.com/setShellCookieApi.php?intIdSite=xxx&amp;intIdMetagame=xxx</ns1:url>
+					<ns1:size/>
+					<ns1:group></ns1:group>
+				</ns1:createFileResponseType>
+			</ns1:files>
+			<ns1:dateEndDownload>2012-08-22</ns1:dateEndDownload>
+			<ns1:remark>&lt;P&gt;Hello %FIRSTNAME% %LASTNAME%! Thank you for purchasing %GAMENAME%! &lt;/P&gt;
+&lt;P&gt;Please print this e-mail and archive it in a safe place. The included information is required to unlock the game or to receive customer support. &lt;/P&gt;
+&lt;P&gt;If you made the purchase using the &lt;EM&gt;Buy Now&lt;/EM&gt; link inside the game, the full version should be already unlocked. If it isn't, please follow the these steps: &lt;/P&gt;
+&lt;UL&gt;
+&lt;LI&gt;Launch %GAMENAME% from the Windows Start menu, or using the desktop shortcut. 
+&lt;LI&gt;When the game start window appears, click the &lt;EM&gt;Unlock&lt;/EM&gt; button. A new window will open. 
+&lt;LI&gt;Enter the Order ID %IDTRAN% in the corresponding text field, then click the &lt;EM&gt;Activate button. &lt;/EM&gt;
+&lt;LI&gt;The game will connect to an activation server, and will be unlocked in less than a minute. Please wait until you see the &lt;EM&gt;Game Unlocked&lt;/EM&gt; message appear. &lt;EM&gt;If you have a firewall, please allow the connection.&lt;/EM&gt; 
+&lt;LI&gt;If something goes wrong while trying to unlock the game, please click the &lt;EM&gt;Help&lt;/EM&gt; button and follow the instructions in the &lt;EM&gt;Troubleshooting&lt;/EM&gt; section. 
+&lt;LI&gt;Enjoy your full version of %GAMENAME%. &lt;/LI&gt;&lt;/UL&gt;
+			</ns1:remark>
+			<ns1:responseCode>0</ns1:responseCode>
+			<ns1:responseMessage></ns1:responseMessage>
+		</ns1:createOrderLineResponseType>
+	</ns1:orderLines>
+	<ns1:downloadManager xsi:nil="true"/>
+	<ns1:responseCode>0</ns1:responseCode>
+	<ns1:responseMessage>OK</ns1:responseMessage>
+</ns1:out>
+</ns1:createResponse>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

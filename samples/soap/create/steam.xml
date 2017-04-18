@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://ws.prep.websizing.com/global/order/v2.2/soap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Body>
+<ns1:createResponse>
+<ns1:out>
+	<ns1:partnerOrderNumber>1537490</ns1:partnerOrderNumber>
+	<ns1:orderNumber>12567639</ns1:orderNumber>
+	<ns1:orderLines>
+		<ns1:createOrderLineResponseType>
+			<ns1:productRef>740492</ns1:productRef>
+			<ns1:lineItems>
+				<ns1:createLineItemResponseType>
+					<ns1:serials>
+						<ns1:createSerialResponseType>
+							<ns1:data>XXXXXXXXXXXXXXXXXXX</ns1:data>
+							<ns1:encoding>text</ns1:encoding>
+							<ns1:charset>utf-8</ns1:charset>
+							<ns1:fileName></ns1:fileName>
+						</ns1:createSerialResponseType>
+					</ns1:serials>
+					<ns1:responseCode>0</ns1:responseCode>
+					<ns1:responseMessage></ns1:responseMessage>
+				</ns1:createLineItemResponseType>
+			</ns1:lineItems>
+			<ns1:files/>
+			<ns1:dateEndDownload>2012-08-22</ns1:dateEndDownload>
+			<ns1:remark>Please follow the instructions below to download and activate your game:&#13;
+&#13;
+If you don't have a Steam account:&#13;
+1. Create an account at https://store.steampowered.com/login/?l=english&#13;
+2. Download and install the Steam software&#13;
+3. Launch Steam. Click on "Activate a product on Steam" to enter the product code you wish to activate.&#13;
+4. Then follow the instructions on screen.&#13;
+5. Ready. Play!&#13;
+&#13;
+ &#13;
+&#13;
+If you already have a Steam account:&#13;
+1. Launch the Steam client. Click on "Activate a product on Steam" to enter the product code you wish to activate.&#13;
+2. Then follow the instructions on screen.&#13;
+3. Ready. Play!
+			</ns1:remark>
+			<ns1:responseCode>0</ns1:responseCode>
+			<ns1:responseMessage></ns1:responseMessage>
+		</ns1:createOrderLineResponseType>
+	</ns1:orderLines>
+	<ns1:downloadManager xsi:nil="true"/>
+	<ns1:responseCode>0</ns1:responseCode>
+	<ns1:responseMessage>OK</ns1:responseMessage>
+</ns1:out>
+</ns1:createResponse>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

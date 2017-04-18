@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://ws.prep.websizing.com/global/order/v2.2/soap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Body>
+<ns1:createResponse>
+<ns1:out>
+	<ns1:partnerOrderNumber>1937362</ns1:partnerOrderNumber>
+	<ns1:orderNumber>12567650</ns1:orderNumber>
+	<ns1:orderLines>
+		<ns1:createOrderLineResponseType>
+			<ns1:productRef>716598</ns1:productRef>
+			<ns1:lineItems>
+				<ns1:createLineItemResponseType>
+					<ns1:serials/>
+					<ns1:responseCode>0</ns1:responseCode>
+					<ns1:responseMessage></ns1:responseMessage>
+				</ns1:createLineItemResponseType>
+			</ns1:lineItems>
+			<ns1:files xsi:nil="true"/>
+			<ns1:dateEndDownload>2014-08-01</ns1:dateEndDownload>
+			<ns1:remark> You can access to your Product Actication serial and your dowload links into your Digital Locker account. your Login details (email address and purchase Order number) are included in this order confirmation e-mail.&#13;
+&#13;
+Click here to access your Digital Locker account: https://digitallocker.nexway.com/genericWS/
+			</ns1:remark>
+			<ns1:responseCode>0</ns1:responseCode>
+			<ns1:responseMessage></ns1:responseMessage>
+		</ns1:createOrderLineResponseType>
+	</ns1:orderLines>
+	<ns1:downloadManager xsi:nil="true"/>
+	<ns1:responseCode>0</ns1:responseCode>
+	<ns1:responseMessage>OK</ns1:responseMessage>
+</ns1:out>
+</ns1:createResponse>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
