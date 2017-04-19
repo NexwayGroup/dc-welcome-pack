@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Sample SOAP client for querying for partner's order history on Digital Content SOAP interface v2.4
+ * Sample SOAP client for querying for customer's order history on Digital Content SOAP interface v2.4
  *
- * Use on the command line the following way (Linux): `php getOrderHistory.php secret partnerId`
+ * Use on the command line the following way (Linux): `php getOrderHistory.php secret customerId`
  * where "secret" is the key given to you by Nexway onboarding team
- * and "partnerId" is the partner's (your) number given to you by the onboarding team.
+ * and "customerId" is the customer id in the partner's (your) system.
  *
  * Upon successful update a JSON structure representing server response will be returned to stdout.
  *
@@ -23,11 +23,11 @@ define("E_REQUEST_ERROR", -3);
 
 // Command line parameters
 if ($argc < 3) {
-    fprintf(STDERR, "Required parameters missing: secret, partnerId");
+    fprintf(STDERR, "Required parameters missing: secret, customerId");
     exit(E_BAD_PARAMS);
 }
 define("SECRET", $argv[1]);
-define("PARTNER_ID", $argv[2]);
+define("CUSTOMER_ID", $argv[2]);
 
 // Service parameters
 define("WSDL_URL", "http://ws.webservices.prep.websizing.com/global/customer/v2.4/soap?wsdl");
@@ -47,12 +47,12 @@ $soap = new SoapClient(WSDL_URL, $options);
 $payload = [
     "secret"  => SECRET,
     "request" => [
-        "partnerId" => PARTNER_ID,
+        "partnerId" => CUSTOMER_ID,
     ],
 ];
 
 // Send "getOrderHistory" request with defined payload
-fprintf(STDOUT, "Requesting order history for partner %s\n", PARTNER_ID);
+fprintf(STDOUT, "Requesting order history for customer %s\n", CUSTOMER_ID);
 try {
     $response = $soap->getOrderHistory($payload);
 } catch (Exception $e) {
