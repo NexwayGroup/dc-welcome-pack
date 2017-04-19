@@ -34,7 +34,7 @@ define("CURRENCY", "EUR");
 define("ORDER_DATE", "2012-03-21T15:19:21+01:00");
 
 // Service parameters
-define("WSDL_URL", "http://ws.prep.websizing.com/global/order/v2.3/soap?wsdl");
+define("WSDL_URL", "http://ws.prep.websizing.com/global/order/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 

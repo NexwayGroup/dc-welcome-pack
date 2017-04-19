@@ -31,7 +31,7 @@ define("SECRET", $argv[1]);
 $productRefs = array_slice($argv, 2);
 
 // Service parameters
-define("WSDL_URL", "http://ws.webservices.prep.websizing.com/global/order/v2.3/soap?wsdl");
+define("WSDL_URL", "http://ws.webservices.prep.websizing.com/global/order/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 
