@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://ws.prep.websizing.com/global/order/v2.2/soap">
+<SOAP-ENV:Body>
+<ns1:createResponse>
+<ns1:out>
+	<ns1:partnerOrderNumber>4670126</ns1:partnerOrderNumber>
+	<ns1:orderNumber>12567638</ns1:orderNumber>
+	<ns1:orderLines>
+		<ns1:createOrderLineResponseType>
+			<ns1:productRef>712506</ns1:productRef>
+			<ns1:lineItems>
+				<ns1:createLineItemResponseType>
+					<ns1:serials>
+						<ns1:createSerialResponseType>
+							<ns1:data>XXXXXXXXXXXXXXXXXXXXX</ns1:data>
+							<ns1:encoding>text</ns1:encoding>
+							<ns1:charset>utf-8</ns1:charset>
+							<ns1:fileName></ns1:fileName>
+						</ns1:createSerialResponseType>
+					</ns1:serials>
+					<ns1:responseCode>0</ns1:responseCode>
+					<ns1:responseMessage></ns1:responseMessage>
+				</ns1:createLineItemResponseType>
+			</ns1:lineItems>
+			<ns1:files>
+				<ns1:createFileResponseType>
+					<ns1:label>Adam's Venture - Part 1</ns1:label>
+					<ns1:type>install</ns1:type>
+					<ns1:url>http://cdn.download.nexway.com/rangeqs.html/file/name.exe</ns1:url>
+					<ns1:size>0.35</ns1:size>
+					<ns1:group></ns1:group>
+				</ns1:createFileResponseType>
+				<ns1:createFileResponseType>
+					<ns1:label>Adam's Venture - Part 2</ns1:label>
+					<ns1:type>install</ns1:type>
+					<ns1:url>http://cdn.download.nexway.com/rangeqs.html/file/name.bin</ns1:url>
+					<ns1:size>565.5</ns1:size>
+					<ns1:group></ns1:group>
+				</ns1:createFileResponseType>
+			</ns1:files>
+			<ns1:dateEndDownload>2012-08-22</ns1:dateEndDownload>
+			<ns1:remark></ns1:remark>
+			<ns1:responseCode>0</ns1:responseCode>
+			<ns1:responseMessage></ns1:responseMessage>
+		</ns1:createOrderLineResponseType>
+	</ns1:orderLines>
+	<ns1:downloadManager>
+		<ns1:pc>http://bibit.prep.websizing.com/dlmgr.php/12567638/10E03125/downloadManager_12567638.exe?server=xxx</ns1:pc>
+		<ns1:mac>http://bibit.prep.websizing.com/dlmgr.php/12567638/10E03125/downloadManager_12567638.dmg?server=xxx</ns1:mac>
+	</ns1:downloadManager>
+	<ns1:responseCode>0</ns1:responseCode>
+	<ns1:responseMessage>OK</ns1:responseMessage>
+</ns1:out>
+</ns1:createResponse>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
