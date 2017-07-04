@@ -1,0 +1,488 @@
+{
+	"variables": [],
+	"info": {
+		"name": "nx-digitalcontent-orders",
+		"_postman_id": "7470a53e-c801-5c8a-bd78-0a031d1810fc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"body is a swagger\"] = responseBody.replace(/\\s+/g, '').startsWith(\"{\\\"swagger\\\":\\\"2.0\\\",\");",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/v2/api-docs",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"Status is present\"] = \"status\" in jsonData;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/status",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login get spetoncule token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Has auth token\"] = jsonData.access_token !== undefined;",
+							"",
+							"postman.setGlobalVariable(\"keycloakSPetonculeAccessToken\", \"Bearer \" + jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{NX_KEYCLOAK_LINK}}/tokens",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"spetoncule\",\n    \"password\": \"Pass2017\",\n    \"realmName\": \"digitalcontentstaging\",\n    \"clientSecret\": \"80b01eb7-3108-45d8-8b2e-98a5db10369b\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login get token with client secret",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Has auth token\"] = jsonData.access_token !== undefined;",
+							"",
+							"postman.setGlobalVariable(\"keycloakAccessToken\", \"Bearer \" + jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{NX_KEYCLOAK_LINK}}/tokens",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n \t\"clientSecret\": \"80b01eb7-3108-45d8-8b2e-98a5db10369b\",\n  \"realmName\": \"digitalcontentstaging\",\n  \"grantType\": \"client_credentials\"\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"partnerOrderNumber\" : \"123456789\",\n    \"orderDate\" : \"2017-03-20T15:19:21+01:00\",\n    \"marketingProgramId\" : \"83940242\",\n    \"currency\" : \"EUR\",\n    \"affiliateId\" : 1234,\n    \"orderLines\" : [\n            {\n                \"productRef\" : \"761947\",\n                \"quantity\" : 1,\n                \"vatRate\" : 11.01,\n                \"amountDutyFree\" : 0,\n                \"amountTotal\" : 1,\n                \"endUserEmail\" : \"kzon@nexway.com\",\n                \"discounts\" : [\n                        {\n                            \"foreignRef\" : \"3123131\",\n                            \"label\" : \"jakislabel\",\n                            \"priceDelta\" : 50.00,\n                            \"operation\" : \"PERCENT\",\n                            \"operationValue\" : 30.00\n                        }\n                    ]\n            }\n        ],\n    \"customer\" : {\n        \"partnerId\" : \"jakisFajnyPartner\",\n        \"email\" : \"blabla@mail.com\",\n        \"language\" : \"fr_FR\",\n        \"locationDelivery\" : {\n            \"companyName\" : \"Nexway\",\n            \"title\" : 3,\n            \"lastName\" : \"Zon\",\n            \"firstName\" : \"Karolina\",\n            \"address1\": \"blablabla\",\n            \"address2\" : \"ja jebie ile tego jest\",\n            \"zipCode\" : \"66-666\",\n            \"city\" : \"Dupa\",\n            \"province\" : \"\",\n            \"country\" : \"FR\",\n            \"phone\" : \"(+66) 666 666 666\",\n            \"fax\" : \"(+66) 666 666 666\"\n        },\n        \"locationInvoice\" : {\n            \"companyName\" : \"Nexway\",\n            \"title\" : 3,\n            \"lastName\" : \"Zon\",\n            \"firstName\" : \"Karolina\",\n            \"address1\": \"blablabla\",\n            \"address2\" : \"ja jebie ile tego jest\",\n            \"zipCode\" : \"66-666\",\n            \"city\" : \"Dupa\",\n            \"province\" : \"\",\n            \"country\" : \"FR\",\n            \"phone\" : \"(+66) 666 666 666\",\n            \"fax\" : \"(+66) 666 666 666\"\n        },\n        \"ipV4\" : \"127.0.0.1\",\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\n    },\n    \"payment\" : {\n        \"paymentMethod\" : \"External Payment\",\n        \"transactionId\" : \"1234-5432\"\n    },\n    \"discounts\" : [\n        {\n            \"foreignRef\" : \"3123131\",\n            \"label\" : \"jakislabel\",\n            \"priceDelta\" : 50.00,\n            \"operation\" : \"PERCENT\",\n            \"operationValue\" : 30.00\n        }\n    ],\n    \"metadata\" : [\n        {\n            \"key\" : \"klucz\",\n            \"value\" : \"wartosc\"\n        }\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"orderLines is present\"] = \"orderLines\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/123456789",
+				"method": "GET",
+				"header": [
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getOrder with bad authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 401\"] = responseCode.code === 401;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"status is 401\"] = jsonData.status === 401;",
+							"tests[\"error is Unauthorized\"] = jsonData.error === \"Unauthorized\";",
+							"tests[\"message is: Authentication Failed: JWT token is not valid\"] = jsonData.message === \"Authentication Failed: JWT token is not valid\";",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/123456789",
+				"method": "GET",
+				"header": [
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "blalbla",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "updateDownloadTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"newDownloadEndDate is present\"] = \"newDownloadEndDate\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/download",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"partnerOrderNumber\": \"123456789\",\n  \"value\": \"2017-05-28\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getDownloadTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"downloadEndDate is present\"] = \"downloadEndDate\" in jsonData",
+							"tests[\"orderLines is present\"] = \"orderLines\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/123456789/download",
+				"method": "GET",
+				"header": [
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "cancelOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/cancel",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"partnerOrderNumber\" : \"123456789\",\n  \"reasonCode\" : 2,\n  \"comment\" : \"test comment\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCrossUpSell",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"productsReturn is present\"] = \"productsReturn\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/order/crossupsell",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"language\": \"EN\",\n  \"products\" : [\n    {\n      \"productRef\": 808456,\n      \"quantity\": 2\n    },\n    {\n      \"productRef\": 722665,\n      \"quantity\": 1\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getStockStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"",
+							"",
+							"",
+							"postman.clearGlobalVariable(\"keycloakSPetonculeAccessToken\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{digitalcontentproxy_base_url}}/stock",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "F6et4ikQaN93",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productRefs\" : [\n    12345,\n    54321\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

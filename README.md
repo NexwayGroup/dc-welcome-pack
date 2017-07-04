@@ -1,19 +1,20 @@
-# Nexway Digital Content
+# Nexway Connect - v3.0
 
 This is a welcome pack [Nexway](https://www.nexway.com) provides to partners wanting to integrate with
-[Nexway Digital Content](http://corporate.nexway.com/nexway-digital-content/).
-It contains documentation and examples to help partners offer products from their product feeds
-and use web services to orchestrate the purchase process.
+[Nexway Connect](https://doc.nexway.store/).
 
-## API Documentation
+It contains postman collections and sample files to help partners offer products from their product feeds
+and use REST api to orchestrate the purchase process.
 
-The API currently provides SOAP interface. You will find example code for consuming this API
-in `samples/` folder.
+# Content
 
-You can get the API documentation in [Digital Content API Guide](http://wsdocs.nexway.com/APIGuide/).
+* postman : postman collection to query REST api
+* samples/catalog : sample catalog files as return by product feed
+* samples/catalog : sample catalog files as return by product feed
+* samples/xml : various createOrder xml response
 
-You can find the [product feed documentation here](https://docs.nexway.com/display/IT/Product+Feed+2.4).
 
-## Frequently Asked Questions
+# What's new in V3.0 
 
-If you have any question, you can check our [FAQ section](http://wsdocs.nexway.com/faq.php).
+* REST api
+* subscription feature
