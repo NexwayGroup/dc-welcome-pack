@@ -34,7 +34,8 @@ define("CURRENCY", "EUR");
 define("ORDER_DATE", "2012-03-21T15:19:21+01:00");
 
 // Service parameters
-define("WSDL_URL", "http://ws.prep.websizing.com/global/order/v2.4/soap?wsdl");
+define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
+define("WSDL_URL", "http://" . HOST . "/global/order/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 
@@ -87,6 +88,7 @@ $payload = [
 
 // Send "create" request with defined payload
 fprintf(STDOUT, "Requesting order creation for product %s\n", PRODUCT_REF);
+fprintf(STDOUT, "Calling endpoint %s\n", WSDL_URL);
 try {
     $response = $soap->create($payload);
 } catch (Exception $e) {

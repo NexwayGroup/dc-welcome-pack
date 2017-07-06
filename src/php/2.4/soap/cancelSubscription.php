@@ -32,7 +32,8 @@ define("ORDER_NUMBER", $argv[2]);
 define("SUBSCRIPTION_ID", $argv[3]);
 
 // Service parameters
-define("WSDL_URL", "http://ws.prep.websizing.com/global/order/v2.4/soap?wsdl");
+define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
+define("WSDL_URL", "http://" . HOST . "/global/order/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 
@@ -56,6 +57,7 @@ $payload = [
 
 // Send "create" request with defined payload
 fprintf(STDOUT, "Requesting subscription cancellation\n");
+fprintf(STDOUT, "Calling endpoint %s\n", WSDL_URL);
 try {
     $response = $soap->cancelSubscription($payload);
 } catch (Exception $e) {

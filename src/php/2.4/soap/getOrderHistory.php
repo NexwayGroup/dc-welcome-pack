@@ -30,7 +30,8 @@ define("SECRET", $argv[1]);
 define("CUSTOMER_ID", $argv[2]);
 
 // Service parameters
-define("WSDL_URL", "http://ws.webservices.prep.websizing.com/global/customer/v2.4/soap?wsdl");
+define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
+define("WSDL_URL", "http://" . HOST . "/global/customer/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 
@@ -53,6 +54,7 @@ $payload = [
 
 // Send "getOrderHistory" request with defined payload
 fprintf(STDOUT, "Requesting order history for customer %s\n", CUSTOMER_ID);
+fprintf(STDOUT, "Calling endpoint %s\n", WSDL_URL);
 try {
     $response = $soap->getOrderHistory($payload);
 } catch (Exception $e) {
