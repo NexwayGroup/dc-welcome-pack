@@ -31,7 +31,7 @@ define("PRODUCT_REF", $argv[2]);
 
 // Partner defined values
 define("CURRENCY", "EUR");
-define("ORDER_DATE", "2012-03-21T15:19:21+01:00");
+define("ORDER_DATE", date("Y-m-d\TH:i:sP"));
 
 // Service parameters
 define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
