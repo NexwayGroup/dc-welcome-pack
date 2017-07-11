@@ -30,7 +30,8 @@ define("SECRET", $argv[1]);
 define("ORDER_NUMBER", $argv[2]);
 
 // Service parameters
-define("WSDL_URL", "http://ws.prep.websizing.com/global/order/v2.4/soap?wsdl");
+define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
+define("WSDL_URL", "http://" . HOST . "/global/order/v2.4/soap?wsdl");
 define("WSDL_CACHE", false);
 define("WSDL_TRACE", true);
 
@@ -55,6 +56,7 @@ $payload = [
 
 // Send "cancel" request with defined payload
 fprintf(STDOUT, "Requesting cancellation of order %s\n", ORDER_NUMBER);
+fprintf(STDOUT, "Calling endpoint %s\n", WSDL_URL);
 try {
     $response = $soap->Cancel($payload);
 } catch (Exception $e) {

@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Sample SOAP client for requesting download time update on Digital Content SOAP interface v2.4
+ * Sample SOAP client for requesting subscription creation on Digital Content SOAP interface v2.4
  *
- * Use on the command line the following way (Linux): `php updateDownloadTime.php secret orderNumber`
- * where "secret" is the key given to you by Nexway onboarding team
- * and "orderNumber" is the partner's (your) order number as passed at "updateDownloadTime" call.
+ * Use on the command line the following way (Linux): `php cancelSubscription.php secret partnerOrderNumber subscriptionId`
+ * where "secret" is the key given to you by Nexway onboarding team,
+ * "partnerOrderNumber" is the order number in your system,
+ * and "subscriptionId" is the reference give during order creation.
  *
  * Upon successful update a JSON structure representing server response will be returned to stdout.
  *
@@ -22,12 +23,13 @@ define("E_SOAP_ERROR", -2);
 define("E_REQUEST_ERROR", -3);
 
 // Command line parameters
-if ($argc < 3) {
-    fprintf(STDERR, "Required parameters missing: secret, orderNumber");
+if ($argc < 4) {
+    fprintf(STDERR, "Required parameters missing: secret, partnerOrderNumber, subscriptionId");
     exit(E_BAD_PARAMS);
 }
 define("SECRET", $argv[1]);
 define("ORDER_NUMBER", $argv[2]);
+define("SUBSCRIPTION_ID", $argv[3]);
 
 // Service parameters
 define("HOST", getenv("NEXWAY_CONNECT_HOST") ? getenv("NEXWAY_CONNECT_HOST") : "ws.prep.websizing.com");
@@ -48,20 +50,22 @@ $soap = new SoapClient(WSDL_URL, $options);
 $payload = [
     "secret" => SECRET,
     "request" => [
-        "partnerOrderNumber" => ORDER_NUMBER,
-        "value" => "P1Y5M2D", // Could be date in YYYY-MM-DD format or period as shown
+        "partnerOrderNumber"  => ORDER_NUMBER,
+        "subscriptionId" => SUBSCRIPTION_ID,
     ],
 ];
 
-// Send "updateDownloadTime" request with defined payload
-fprintf(STDOUT, "Requesting download time update on order %s\n", ORDER_NUMBER);
+// Send "create" request with defined payload
+fprintf(STDOUT, "Requesting subscription cancellation\n");
 fprintf(STDOUT, "Calling endpoint %s\n", WSDL_URL);
 try {
-    $response = $soap->updateDownloadTime($payload);
+    $response = $soap->cancelSubscription($payload);
 } catch (Exception $e) {
     fprintf(STDOUT, "SOAP error: %s\n", $e->getMessage());
     fprintf(STDOUT, "Response code: %s\n", $e->faultcode);
     fprintf(STDOUT, "Response message: %s\n", $e->faultstring);
+    fprintf(STDOUT, "Response message: %s\n", $e->__getLastResponse());
+
     exit(E_SOAP_ERROR);
 }
 
