@@ -67,7 +67,7 @@ $payload = [
             "email"    => "jdoe@mail.com",
             "language" => "fr_FR",
         ],
-        "partnerOrderNumber" => (string)rand(100000, 10000000), // Provide your system order number
+        "partnerOrderNumber" => "PARTNER-" . time(), // Provide your system order number
         "marketingProgramId" => null,
         "orderLines" => [
             "createOrderLinesType" => [
