@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "NexwayConnect",
-		"_postman_id": "6bda644e-07e8-12e7-6697-7f76e2ade1de",
+		"_postman_id": "ca06f046-0950-89d2-1481-76f7ff5fc336",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -26,7 +26,18 @@
 			"request": {
 				"url": "{{nexwayconnect_base_url}}/status",
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -47,7 +58,9 @@
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"Has auth token\"] = jsonData.access_token !== undefined;",
 							"",
-							"postman.setGlobalVariable(\"keycloakAccessToken\", \"Bearer \" + jsonData.access_token);"
+							"postman.setGlobalVariable(\"keycloakAccessToken\", \"Bearer \" + jsonData.access_token);",
+							"",
+							"postman.clearEnvironmentVariable(\"variable_key\");"
 						]
 					}
 				}
@@ -64,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"clientSecret\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\",\n  \"realmName\": \"YOUR_REALM_NAME\",\n  \"grantType\": \"client_credentials\"\n }"
+					"raw": "{\n  \"clientSecret\": \"{{clientSecret}}\",\n  \"realmName\": \"{{realmName}}\",\n  \"grantType\": \"client_credentials\"\n }"
 				},
 				"description": ""
 			},
@@ -107,7 +120,7 @@
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"value": "{{secret}}",
 						"description": ""
 					},
 					{
@@ -118,9 +131,342 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"partnerOrderNumber\" : \"123456789\",\n    \"orderDate\" : \"2017-06-30T15:19:21+01:00\",\n    \"marketingProgramId\" : \"83940242\",\n    \"currency\" : \"EUR\",\n    \"affiliateId\" : 1234,\n    \"orderLines\" : [\n            {\n                \"productRef\" : \"824873\",\n                \"quantity\" : 1,\n                \"vatRate\" : 11.01,\n                \"amountDutyFree\" : 0,\n                \"amountTotal\" : 1,\n                \"endUserEmail\" : \"kzon@nexway.com\",\n                \"discounts\" : [\n                        {\n                            \"foreignRef\" : \"3123131\",\n                            \"label\" : \"label_name\",\n                            \"priceDelta\" : 50.00,\n                            \"operation\" : \"PERCENT\",\n                            \"operationValue\" : 30.00\n                        }\n                    ]\n            }\n        ],\n    \"customer\" : {\n        \"partnerId\" : \"XXXXXX\",\n        \"email\" : \"user@mail.com\",\n        \"language\" : \"fr_FR\",\n        \"locationDelivery\" : {\n            \"companyName\" : \"Company\",\n            \"title\" : 3,\n            \"lastName\" : \"Doe\",\n            \"firstName\" : \"Jane\",\n            \"address1\": \"Address line 1\",\n            \"address2\" : \"Address line 1\",\n            \"zipCode\" : \"00-000\",\n            \"city\" : \"City name\",\n            \"province\" : \"\",\n            \"country\" : \"FR\",\n            \"phone\" : \"(+00) 000 000 000\",\n            \"fax\" : \"(+66) 000 000 000\"\n        },\n        \"locationInvoice\" : {\n            \"companyName\" : \"Nexway\",\n            \"title\" : 3,\n            \"lastName\" : \"Doe\",\n            \"firstName\" : \"Jane\",\n            \"address1\": \"Address line 1\",\n            \"address2\" : \"Address line 1\",\n            \"zipCode\" : \"00-000\",\n            \"city\" : \"City name\",\n            \"province\" : \"\",\n            \"country\" : \"FR\",\n            \"phone\" : \"(+00) 000 000 000\",\n            \"fax\" : \"(+00) 000 000 000\"\n        },\n        \"ipV4\" : \"127.0.0.1\",\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\n    },\n    \"payment\" : {\n        \"paymentMethod\" : \"External Payment\",\n        \"transactionId\" : \"1234-5432\"\n    },\n    \"discounts\" : [\n        {\n            \"foreignRef\" : \"3123131\",\n            \"label\" : \"label_name\",\n            \"priceDelta\" : 50.00,\n            \"operation\" : \"PERCENT\",\n            \"operationValue\" : 30.00\n        }\n    ],\n    \"metadata\" : [\n        {\n            \"key\" : \"some key\",\n            \"value\" : \"some value\"\n        }\n    ]\n}"
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"NEXWAY-100\",\r\n    \"orderDate\" : \"2017-10-27T14:00:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"BRL\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"825393\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"mferda@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"mferda@nexway.com\",\r\n        \"language\" : \"pt_BR\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
 				},
 				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder - Game sultan example",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"NEXWAY-121\",\r\n    \"orderDate\" : \"2017-12-18T05:53:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"EUR\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"805403\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"mferda@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"mferda@nexway.com\",\r\n        \"language\" : \"en_XE\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder - Inplay Interactive Example",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"partnerOrderNumber\": \"123456782\",\n\t\"orderDate\": \"2017-06-30T15:19:21+01:00\",\n\t\"marketingProgramId\": \"83940242\",\n\t\"currency\": \"KRW\",\n\t\"orderLines\": [\n\t\t{\n\t\t\t\"productRef\": \"750029\",\n\t\t\t\"quantity\": 1,\n\t\t\t\"vatRate\": 11.01,\n\t\t\t\"amountDutyFree\": 0,\n\t\t\t\"amountTotal\": 1,\n\t\t\t\"endUserEmail\": \"kzon@nexway.com\",\n\t\t\t\"discounts\": [\n\t\t\t\t{\n\t\t\t\t\t\"foreignRef\": \"3123131\",\n\t\t\t\t\t\"label\": \"label_name\",\n\t\t\t\t\t\"priceDelta\": 50,\n\t\t\t\t\t\"operation\": \"PERCENT\",\n\t\t\t\t\t\"operationValue\": 30\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"customer\": {\n\t\t\"partnerId\": \"XXXXXX\",\n\t\t\"email\": \"user@mail.com\",\n\t\t\"language\": \"en_US\",\n\t\t\"locationDelivery\": {\n\t\t\t\"title\": 3,\n\t\t\t\"lastName\": \"Doe\",\n\t\t\t\"firstName\": \"Jane\",\n\t\t\t\"address1\": \"Address line 1\",\n\t\t\t\"zipCode\": \"00-000\",\n\t\t\t\"city\": \"City name\",\n\t\t\t\"country\": \"FR\",\n\t\t\t\"phone\": \"(+00) 000 000 000\",\n\t\t\t\"fax\": \"(+66) 000 000 000\"\n\t\t},\n\t\t\"locationInvoice\": {\n\t\t\t\"title\": 3,\n\t\t\t\"lastName\": \"Doe\",\n\t\t\t\"firstName\": \"Jane\",\n\t\t\t\"address1\": \"Address line 1\",\n\t\t\t\"zipCode\": \"00-000\",\n\t\t\t\"city\": \"City name\",\n\t\t\t\"country\": \"FR\",\n\t\t\t\"phone\": \"(+00) 000 000 000\",\n\t\t\t\"fax\": \"(+00) 000 000 000\"\n\t\t},\n\t\t\"ipV4\": \"127.0.0.1\"\n\t},\n\t\"payment\": {\n\t\t\"paymentMethod\": \"External Payment\",\n\t\t\"transactionId\": \"1234-5432\"\n\t},\n\t\"discounts\": [\n\t\t{\n\t\t\t\"foreignRef\": \"3123131\",\n\t\t\t\"label\": \"label_name\",\n\t\t\t\"priceDelta\": 50,\n\t\t\t\"operation\": \"PERCENT\",\n\t\t\t\"operationValue\": 30\n\t\t}\n\t],\n\t\"metadata\": [\n\t\t{\n\t\t\t\"key\": \"some key\",\n\t\t\t\"value\": \"some value\"\n\t\t}\n\t]\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder - Razer example",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"NEXWAY-09\",\r\n    \"orderDate\" : \"2017-12-18T14:40:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"SGD\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"805403\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"orderLineEndUser3@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"melinda.ferda@gmail.com\",\r\n        \"language\" : \"en_US\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doxe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder - Tascom exemple",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"NEXWAY-102\",\r\n    \"orderDate\" : \"2017-10-30T14:49:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"BRL\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"825393\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"mferda@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"mferda@nexway.com\",\r\n        \"language\" : \"pt_BR\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder - 2 Game exemple",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"affiliateId\": 123,\r\n    \"currency\": \"USD\",\r\n    \"customer\": {\r\n        \"email\": \"mferda@nexway.com\",\r\n        \"ipV4\": \"127.0.0.1\",\r\n        \"ipV6\": null,\r\n        \"language\": \"en_US\",\r\n        \"locationDelivery\": {\r\n            \"address1\": \"3 Kullat K3 A9/2 Tirana, 1000 \",\r\n            \"address2\": null,\r\n            \"city\": \"wer\",\r\n            \"companyName\": null,\r\n            \"country\": \"US\",\r\n            \"fax\": \"+355-4-2271384\",\r\n            \"firstName\": \"Hima\",\r\n            \"lastName\": \"Rr. Dervish\",\r\n            \"phone\": \"+355-4-2271385\",\r\n            \"province\": \"US-MD\",\r\n            \"title\": \"1\",\r\n            \"zipCode\": \"45-fgg\"\r\n        },\r\n        \"locationInvoice\": {\r\n            \"address1\": \"3 Kullat K3 A9/2 Tirana, 1000 Albania\",\r\n            \"address2\": null,\r\n            \"city\": \"werwr\",\r\n            \"companyName\": null,\r\n            \"country\": \"US\",\r\n            \"fax\": \"+355-4-2271384\",\r\n            \"firstName\": \"Hima\",\r\n            \"lastName\": \"Rr. Dervish\",\r\n            \"phone\": \"+355-4-2271385\",\r\n            \"province\": \"US-MD\",\r\n            \"title\": \"1\",\r\n            \"zipCode\": \"45-fgg\"\r\n        },\r\n        \"partnerId\": \"465346546\"\r\n    },\r\n    \"discounts\": [\r\n        {\r\n \t\t\"foreignRef\": \"eqw13123\",\r\n \t\t\"label\": \"1123dasd\",\r\n \t\t\"operation\": \"Percents\",\r\n \t\t\"operationValue\": \"12.9\",\r\n \t\t\"priceDelta\": \"900.5\"\r\n        }\r\n    ],\r\n    \"marketingProgramId\": \"20171030124448\",\r\n    \"metadata\": [\r\n        {\r\n            \"key\": \"TestData\",\r\n            \"value\": \"CNTEST\"\r\n        }\r\n    ],\r\n    \"orderDate\": \"2017-10-31T14:24:48+00:00\",\r\n    \"orderLines\": [\r\n        {\r\n            \"amountDutyFree\": \"200.00\",\r\n            \"amountTotal\": \"120.00\",\r\n            \"discounts\": [\r\n                {\r\n \t\t\t\"foreignRef\": \"eqw13123\",\r\n \t\t\t\"label\": \"1123dasd\",\r\n \t\t\t\"operation\": \"Percents\",\r\n \t\t\t\"operationValue\": \"12.9\",\r\n \t\t\t\"priceDelta\": \"900.5\"\r\n                }\r\n            ],\r\n            \"endUserEmail\": \"mferda@nexway.com\",\r\n            \"productRef\": \"708618\",\r\n            \"quantity\": \"3\",\r\n            \"vatRate\": \"55.0\"\r\n        }\r\n    ],\r\n    \"partnerOrderNumber\": \"NEXWAY-101\",\r\n    \"payment\": null\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder demostore US",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
+							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
+							"tests[\"downloadManager is present\"] = \"downloadManager\" in jsonData",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"if (jsonData.responseCode === 0) {",
+							"    tests[\"subscriptionId is present\"] = \"subscriptionId\" in jsonData.orderLines[0].lineItems[0]",
+							"}",
+							"",
+							"postman.setGlobalVariable(\"orderId\", jsonData.partnerOrderNumber);",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//postman.setGlobalVariable(\"orderDate\", new Date().toISOString());"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"NEXWAY-004\",\r\n    \"orderDate\" : \"2017-12-18T16:26:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"EUR\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"731271\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n               \r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"melinda.ferda2@gmail.com\",\r\n        \"language\" : \"en_US\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
+				},
+				"description": null
 			},
 			"response": []
 		},
@@ -153,17 +499,17 @@
 				}
 			],
 			"request": {
-				"url": "{{nexwayconnect_base_url}}/order/{{orderId}}",
+				"url": "{{nexwayconnect_base_url}}/order/NEXWAY-01",
 				"method": "GET",
 				"header": [
 					{
-						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
 						"description": ""
 					},
 					{
-						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}",
+						"key": "secret",
+						"value": "{{secret}}",
 						"description": ""
 					}
 				],
@@ -271,53 +617,6 @@
 			"response": []
 		},
 		{
-			"name": "cancelOrder",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Body is json and not empty\"] = jsonData !== null;",
-							"tests[\"partnerOrderNumber is present\"] = \"partnerOrderNumber\" in jsonData",
-							"tests[\"orderNumber is present\"] = \"orderNumber\" in jsonData",
-							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
-							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{nexwayconnect_base_url}}/order/cancel",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"partnerOrderNumber\" : {{orderId}},\n  \"reasonCode\" : 2,\n  \"comment\" : \"comment about cancellation\"\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "getCrossUpSell",
 			"event": [
 				{
@@ -346,7 +645,7 @@
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"value": "{{secret}}",
 						"description": ""
 					},
 					{
@@ -357,7 +656,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"language\": \"EN\",\n  \"products\" : [\n    {\n      \"productRef\": 808456,\n      \"quantity\": 2\n    },\n    {\n      \"productRef\": 722665,\n      \"quantity\": 1\n    }\n  ]\n}"
+					"raw": "{\n  \"language\": \"EN\",\n  \"products\" : [\n    {\n      \"productRef\": 825393,\n      \"quantity\": 2\n    },\n    {\n      \"productRef\": 825394,\n      \"quantity\": 1\n    }\n  ]\n}"
 				},
 				"description": ""
 			},
@@ -375,9 +674,7 @@
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"Body is json and not empty\"] = jsonData !== null;",
 							"",
-							"",
-							"",
-							"postman.clearGlobalVariable(\"keycloakSPetonculeAccessToken\");"
+							""
 						]
 					}
 				}
@@ -393,7 +690,7 @@
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"value": "{{secret}}",
 						"description": ""
 					},
 					{
@@ -404,7 +701,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"productRefs\" : [\n    12345,\n    54321\n    ]\n}"
+					"raw": "{\n  \"productRefs\" : [\n    748575758\n   \n    ]\n}"
 				},
 				"description": ""
 			},
@@ -451,7 +748,7 @@
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"value": "{{secret}}",
 						"description": ""
 					},
 					{
@@ -462,7 +759,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"partnerOrderNumber\" : {{orderId}},\n  \"subscriptionId\": {{subscriptionId}}\n}"
+					"raw": "{\n  \"partnerOrderNumber\" : \"{{partnerOrderNumber}}\",\n  \"subscriptionId\": {{subscriptionId}}\n}"
 				},
 				"description": ""
 			},
@@ -501,7 +798,7 @@
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX",
+						"value": "{{secret}}",
 						"description": ""
 					},
 					{
@@ -512,7 +809,101 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"partnerOrderNumber\" : {{orderId}},\n  \"subscriptionId\": {{subscriptionId}}\n}"
+					"raw": "{\n  \"partnerOrderNumber\" : \"{{orderId}}\",\n  \"subscriptionId\": {{subscriptionId}}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCategories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"categoryList is present\"] = \"categoryList\" in jsonData",
+							"tests[\"category id is present\"] = \"id\" in jsonData.categoryList[0]",
+							"tests[\"category label is present\"] = \"label\" in jsonData.categoryList[0]",
+							"tests[\"subcategories is present\"] = \"subcategories\" in jsonData.categoryList[0]",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/catalog/categories/FR",
+				"method": "GET",
+				"header": [
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getOsList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Body is json and not empty\"] = jsonData !== null;",
+							"tests[\"categoryList is present\"] = \"categoryList\" in jsonData",
+							"tests[\"category id is present\"] = \"id\" in jsonData.categoryList[0]",
+							"tests[\"category label is present\"] = \"label\" in jsonData.categoryList[0]",
+							"tests[\"subcategories is present\"] = \"subcategories\" in jsonData.categoryList[0]",
+							"tests[\"responseCode is present\"] = \"responseCode\" in jsonData",
+							"tests[\"responseMessage is present\"] = \"responseMessage\" in jsonData",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{nexwayconnect_base_url}}/catalog/oslist",
+				"method": "GET",
+				"header": [
+					{
+						"key": "secret",
+						"value": "{{secret}}",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
 				"description": ""
 			},
