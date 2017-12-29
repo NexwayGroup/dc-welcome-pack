@@ -1,5 +1,5 @@
 {
-  "id": "3de87572-0fed-2067-9766-0083f8e4b13a",
+  "id": "5cb08746-7edd-90df-b1cc-0a720f24a0ca",
   "name": "Nexway Connect - PRODUCTION - Environment sample",
   "values": [
     {
@@ -16,14 +16,8 @@
     },
     {
       "enabled": true,
-      "key": "orderId",
-      "value": "your_orderID",
-      "type": "text"
-    },
-    {
-      "enabled": true,
       "key": "secret",
-      "value": "your_secret",
+      "value": "your_API_secret",
       "type": "text"
     },
     {
@@ -35,12 +29,30 @@
     {
       "enabled": true,
       "key": "clientSecret",
-      "value": "your_API_KEY",
+      "value": "your_client_secret",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "orderId",
+      "value": "order Id",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "subscriptionId",
+      "value": "subscription Id",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "partnerOrderNumber",
+      "value": "partner order number",
       "type": "text"
     }
   ],
-  "timestamp": 1514447282000,
+  "timestamp": 1514558058602,
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2017-12-28T07:49:14.730Z",
-  "_postman_exported_using": "Postman/5.4.0"
+  "_postman_exported_at": "2017-12-29T14:34:22.366Z",
+  "_postman_exported_using": "Postman/5.5.0"
 }
