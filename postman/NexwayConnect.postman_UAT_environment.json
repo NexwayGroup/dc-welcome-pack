@@ -1,0 +1,58 @@
+{
+  "id": "9a7209fa-40b1-4d85-1be5-f078b163d33f",
+  "name": "Nexway Connect - UAT - Environment sample",
+  "values": [
+    {
+      "enabled": true,
+      "key": "nexwayconnect_base_url",
+      "value": "https://api-uat.staging.nexway.build/connect",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "NX_KEYCLOAK_LINK",
+      "value": "https://api.staging.nexway.build/iam",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "realmName",
+      "value": "your_realm_nam",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "clientSecret",
+      "value": "your_API_secret",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "secret",
+      "value": "your_catalog_secret",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "orderId",
+      "value": "order_id",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "subscriptionId",
+      "value": "subscription_id",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "partnerOrderNumber",
+      "value": "partner_order_number",
+      "type": "text"
+    }
+  ],
+  "timestamp": 1514563030457,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2017-12-29T15:58:27.655Z",
+  "_postman_exported_using": "Postman/5.5.0"
+}
