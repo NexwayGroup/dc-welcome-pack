@@ -1,9 +1,10 @@
 {
+	"variables": [],
 	"info": {
 		"name": "NexwayConnect",
-		"_postman_id": "d07d3381-0ec3-6705-76ad-aeb3a01599d9",
+		"_postman_id": "09071552-1497-74be-9ed8-0cd45681ac8b",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -26,6 +27,7 @@
 				}
 			],
 			"request": {
+				"url": "{{NX_KEYCLOAK_LINK}}/tokens",
 				"method": "POST",
 				"header": [
 					{
@@ -37,54 +39,32 @@
 					"mode": "raw",
 					"raw": "{\n  \"clientSecret\": \"{{clientSecret}}\",\n  \"realmName\": \"{{realmName}}\",\n  \"grantType\": \"client_credentials\"\n }"
 				},
-				"url": {
-					"raw": "{{NX_KEYCLOAK_LINK}}/tokens",
-					"host": [
-						"{{NX_KEYCLOAK_LINK}}"
-					],
-					"path": [
-						"tokens"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "Invalidate token",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "26894674-a0b0-43c6-b4a6-2256637bd369",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
 			"request": {
+				"url": "{{NX_KEYCLOAK_LINK}}/tokens/reset",
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{NX_KEYCLOAK_LINK}}/tokens/reset",
-					"host": [
-						"{{NX_KEYCLOAK_LINK}}"
-					],
-					"path": [
-						"tokens",
-						"reset"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -115,35 +95,30 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/new",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					},
 					{
 						"key": "secret",
-						"value": "{{secret}}"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"partnerOrderNumber\" : \"{{partnerOrderNumber}}}}\",\r\n    \"orderDate\" : \"2017-10-27T14:00:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"BRL\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"825393\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"mferda@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"mferda@nexway.com\",\r\n        \"language\" : \"pt_BR\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
+					"raw": "{\r\n    \"partnerOrderNumber\" : \"{{partnerOrderNumber}}\",\r\n    \"orderDate\" : \"2018-01-18T15:40:21+01:00\",\r\n    \"marketingProgramId\" : \"83940242\",\r\n    \"currency\" : \"USD\",\r\n    \"affiliateId\" : 1234,\r\n    \"orderLines\" : [\r\n            {\r\n                \"productRef\" : \"811537\",\r\n                \"quantity\" : 1,\r\n                \"vatRate\" : 20,\r\n                \"amountDutyFree\" : 0,\r\n                \"amountTotal\" : 1,\r\n                \"endUserEmail\" : \"mferda@nexway.com\",\r\n                \"discounts\" : [\r\n                        {\r\n                        }\r\n                    ]\r\n            }\r\n        ],\r\n    \"customer\" : {\r\n        \"partnerId\" : \"XXXXXX\",\r\n        \"email\" : \"mferda@nexway.com\",\r\n        \"language\" : \"en_US\",\r\n        \"locationDelivery\" : {\r\n            \"companyName\" : \"Company\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+66) 000 000 000\"\r\n        },\r\n        \"locationInvoice\" : {\r\n            \"companyName\" : \"Nexway\",\r\n            \"title\" : 3,\r\n            \"lastName\" : \"Doe\",\r\n            \"firstName\" : \"Jane\",\r\n            \"address1\": \"Address line 1\",\r\n            \"address2\" : \"Address line 1\",\r\n            \"zipCode\" : \"00-000\",\r\n            \"city\" : \"City name\",\r\n            \"province\" : \"\",\r\n            \"country\" : \"FR\",\r\n            \"phone\" : \"(+00) 000 000 000\",\r\n            \"fax\" : \"(+00) 000 000 000\"\r\n        },\r\n        \"ipV4\" : \"127.0.0.1\",\r\n        \"ipV6\" : \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\r\n    },\r\n    \"payment\" : {\r\n        \"paymentMethod\" : \"External Payment\",\r\n        \"transactionId\" : \"1234-5432\"\r\n    },\r\n    \"discounts\" : [\r\n        {\r\n           \r\n        }\r\n    ],\r\n    \"metadata\" : [\r\n        {\r\n            \"key\" : \"some key\",\r\n            \"value\" : \"some value\"\r\n        }\r\n    ]\r\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/new",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"new"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -176,6 +151,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/{{orderId}}",
 				"method": "GET",
 				"header": [
 					{
@@ -191,16 +167,7 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/{{orderId}}",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"{{orderId}}"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -227,35 +194,30 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/cancel",
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"comment\": \"your_comment\",\n    \"partnerOrderNumber\": \"{{partnerOrderNumber}}\",\n    \"reasonCode\": 2\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/cancel",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"cancel"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -282,32 +244,25 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/{{orderId}}/download",
 				"method": "GET",
 				"header": [
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/{{orderId}}/download",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"{{orderId}}",
-						"download"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -334,35 +289,30 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/download",
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					},
 					{
 						"key": "secret",
-						"value": "XXXXXXXXXXXXX"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"partnerOrderNumber\": {{orderId}},\n  \"value\": \"2017-07-28\"\n}"
+					"raw": "{\n  \"partnerOrderNumber\": \"{{partnerOrderNumber}}\",\n  \"value\": \"2017-07-28\"\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/download",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"download"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -384,6 +334,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/stock",
 				"method": "POST",
 				"header": [
 					{
@@ -403,15 +354,7 @@
 					"mode": "raw",
 					"raw": "{\n  \"productRefs\" : [\n    748575758\n   \n    ]\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/stock",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"stock"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -434,6 +377,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/order/crossupsell",
 				"method": "POST",
 				"header": [
 					{
@@ -453,16 +397,7 @@
 					"mode": "raw",
 					"raw": "{\n  \"language\": \"EN\",\n  \"products\" : [\n    {\n      \"productRef\": \"825393\",\n      \"quantity\": \"2\"\n    },\n    {\n      \"productRef\": \"825394\",\n      \"quantity\": \"1\"\n    }\n  ]\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/order/crossupsell",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"order",
-						"crossupsell"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -497,6 +432,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/subscription",
 				"method": "POST",
 				"header": [
 					{
@@ -516,15 +452,7 @@
 					"mode": "raw",
 					"raw": "{\n  \"partnerOrderNumber\" : \"{{partnerOrderNumber}}\",\n  \"subscriptionId\": {{subscriptionId}}\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/subscription",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"subscription"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -551,34 +479,30 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/subscription",
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					},
 					{
 						"key": "secret",
-						"value": "{{secret}}"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"partnerOrderNumber\" : \"{{orderId}}\",\n  \"subscriptionId\": {{subscriptionId}}\n}"
+					"raw": "{\n  \"partnerOrderNumber\" : \"{{partnerOrderNumber}}\",\n  \"subscriptionId\": 5618577\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/subscription",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"subscription"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -605,6 +529,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/subscription/renew",
 				"method": "POST",
 				"header": [
 					{
@@ -624,16 +549,7 @@
 					"mode": "raw",
 					"raw": "{\n  \"partnerOrderNumber\" : \"{{orderId}}\",\n  \"subscriptionId\": {{subscriptionId}}\n}"
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/subscription/renew",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"subscription",
-						"renew"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -662,32 +578,25 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/catalog/categories/FR",
 				"method": "GET",
 				"header": [
 					{
 						"key": "secret",
-						"value": "{{secret}}"
+						"value": "{{secret}}",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{keycloakAccessToken}}"
+						"value": "{{keycloakAccessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/catalog/categories/",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"catalog",
-						"categories",
-						""
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
@@ -697,7 +606,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "16fe4f34-987a-4617-854c-be5fc1942125",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -713,6 +621,7 @@
 				}
 			],
 			"request": {
+				"url": "{{nexwayconnect_base_url}}/catalog/oslist",
 				"method": "GET",
 				"header": [
 					{
@@ -728,16 +637,7 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{nexwayconnect_base_url}}/catalog/oslist",
-					"host": [
-						"{{nexwayconnect_base_url}}"
-					],
-					"path": [
-						"catalog",
-						"oslist"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		}
